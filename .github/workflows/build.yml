@@ -17,8 +17,10 @@ jobs:
         with:
           channel: 'stable'
       - run: flutter pub get
+        working-directory: smart_road_guide
       - run: flutter build apk --release
+        working-directory: smart_road_guide
       - uses: actions/upload-artifact@v4
         with:
           name: app-release
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: smart_road_guide/build/app/outputs/flutter-apk/app-release.apk
