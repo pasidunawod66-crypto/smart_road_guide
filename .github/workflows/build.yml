@@ -9,18 +9,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Create lib directory
+        run: |
+          mkdir -p lib
+          cp main.dart lib/main.dart
+
       - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
+
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+
       - run: flutter pub get
-        working-directory: smart_road_guide
       - run: flutter build apk --release
-        working-directory: smart_road_guide
+
       - uses: actions/upload-artifact@v4
         with:
           name: app-release
-          path: smart_road_guide/build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-release.apk
